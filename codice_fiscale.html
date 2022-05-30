@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<title>Generate Codice Fiscale</title>
+<script type="text/javascript" src="fiscalcode.js"></script>
+
+<body>
+    <style>
+        tr td:nth-child(1) {
+            text-align: right;
+            font-weight: bold;
+        }
+
+        table {
+            border-collapse: collapse;
+            border: 1px solid black;
+            background-color: rgb(254, 147, 147);
+        }
+
+        td {
+            padding: 5px;
+        }
+
+        body {
+
+            margin-left: 40%;
+            margin-top: 10%;
+            background-image: linear-gradient(-90deg, rgb(184, 179, 209), rgb(196, 132, 132));
+
+        }
+
+        caption {
+            padding: 10px;
+            font-weight: bolder;
+            font-size: large;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        #code {
+            font-weight: bold;
+            color: rgb(16, 16, 171);
+            cursor: grab;
+        }
+    </style>
+
+    <div>
+
+
+        <div>
+            <table>
+                <caption>
+                    <div>
+                        Generate Codice Fiscale
+                    </div>
+                </caption>
+                <tr>
+                    <td>
+                        Given Name:
+                    </td>
+                    <td>
+                        <input type="text" id="givenName" value="" placeholder="Enter Given Name" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Surname:
+                    </td>
+                    <td>
+                        <input type="text" id="surName" value="" placeholder="Enter Surname" required>
+                    </td>
+                </tr>
+               
+                <tr>
+                    <td>
+                        Date of Birth:
+                    </td>
+                    <td>
+                        <input type="date" id="dob" value="" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Gender:
+                    </td>
+                    <td>
+                        <label>
+                            <input type="radio" name="gen" value="M" required>
+                            Male
+                        </label>
+                        <label>
+                            <input type="radio" name="gen" value="F" required>
+                            Female
+                        </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button onclick="getCode()" >
+                            Get Code
+                        </button>
+                    </td>
+                    <td>
+                        <div>
+                            <u id="code" onclick="copyToClip()" onmousemove="mouseOut()">Code</u>
+                            <span></span>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+
+        </div>
+    </div>
+
+</body>
+<script>
+    function getCode() {
+        try {
+            var givenName = document.getElementById("givenName").value;
+            var surName = document.getElementById("surName").value;
+            var dob = new Date(document.getElementById("dob").value);
+
+            if (givenName.length == 0 || surName.length == 0 || dob == "Invalid Date")
+                throw "Value requires";
+
+            var gen = document.querySelector("input[name=gen]:checked").value;
+            var fiscalCode = new Person(givenName, surName, gen, dob).getFiscal();
+
+            document.getElementById("code").innerHTML = fiscalCode;
+
+        } catch (err) {
+            alert(err);
+        }
+    }
+    function copyToClip() {
+        var code = document.getElementById("code");
+        code.setAttribute("style","cursor:grabbing");
+        if (code.innerHTML != "Code"){
+            navigator.clipboard.writeText(code.innerHTML);
+            document.getElementsByTagName("span")[0].innerHTML="Copied";
+        }
+        
+    }
+    function mouseOut(){
+        document.getElementById("code").setAttribute("style","cursor:grab");
+    }
+</script>
+
+</html>
