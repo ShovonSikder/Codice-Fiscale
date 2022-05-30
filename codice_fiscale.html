@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <html>
-<title>Generate Codice Fiscale</title>
-<script type="text/javascript" src="fiscalcode.js"></script>
+
+<head>
+    <title>Generate Codice Fiscale</title>
+    <script type="text/javascript" src="fiscalcode.js"></script>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+</head>
 
 <body>
     <style>
@@ -43,13 +47,14 @@
             color: rgb(16, 16, 171);
             cursor: grab;
         }
-        @media screen and (max-width:770px) {
-            body{
+
+        @media screen and (max-width:768px) {
+            body {
                 margin: 0;
                 padding: 20px;
                 align-items: center;
             }
-            
+
         }
     </style>
 
@@ -79,7 +84,7 @@
                         <input type="text" id="surName" value="" placeholder="Enter Surname" required>
                     </td>
                 </tr>
-               
+
                 <tr>
                     <td>
                         Date of Birth:
@@ -105,7 +110,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <button onclick="getCode()" >
+                        <button onclick="getCode()">
                             Get Code
                         </button>
                     </td>
@@ -124,7 +129,7 @@
 </body>
 <script>
     function getCode() {
-        document.getElementsByTagName("span")[0].innerHTML="";
+        document.getElementsByTagName("span")[0].innerHTML = "";
         try {
             var givenName = document.getElementById("givenName").value;
             var surName = document.getElementById("surName").value;
@@ -144,15 +149,15 @@
     }
     function copyToClip() {
         var code = document.getElementById("code");
-        code.setAttribute("style","cursor:grabbing");
-        if (code.innerHTML != "Code"){
+        code.setAttribute("style", "cursor:grabbing");
+        if (code.innerHTML != "Code") {
             navigator.clipboard.writeText(code.innerHTML);
-            document.getElementsByTagName("span")[0].innerHTML="Copied";
+            document.getElementsByTagName("span")[0].innerHTML = "Copied";
         }
-        
+
     }
-    function mouseOut(){
-        document.getElementById("code").setAttribute("style","cursor:grab");
+    function mouseOut() {
+        document.getElementById("code").setAttribute("style", "cursor:grab");
     }
 </script>
 
