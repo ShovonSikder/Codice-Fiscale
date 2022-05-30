@@ -1,5 +1,7 @@
 Each person in Italy has a unique identifying ID code issued by the national tax
 office after the birth registration: The Fiscal Code (Codice Fiscale).
+
+Run the html file
 *****************************************************************************
 Given a JavaScript object containing the personal data of a person (name, surname, gender and date of birth) return the 11 code characters as a string following these steps:  Generate 3 capital letters from the surname, if it has: o At least 3 consonants then the first three consonants are used. (Newman -
 
